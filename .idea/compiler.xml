@@ -14,6 +14,8 @@
         <module name="heima-leadnews-user" />
         <module name="heima-leadnews-article" />
         <module name="freemarker-test" />
+        <module name="heima-leadnews-admin-gateway" />
+        <module name="heima-leadnews-admin" />
         <module name="kafka-test" />
         <module name="tess4jdemo" />
         <module name="es-init" />
@@ -31,6 +33,8 @@
       <module name="freemarker-test" target="1.8" />
       <module name="heima-file-starter" target="1.8" />
       <module name="heima-leadnews" target="1.8" />
+      <module name="heima-leadnews-admin" target="1.8" />
+      <module name="heima-leadnews-admin-gateway" target="1.8" />
       <module name="heima-leadnews-app-gateway" target="1.8" />
       <module name="heima-leadnews-article" target="1.8" />
       <module name="heima-leadnews-basic" target="1.8" />
@@ -57,16 +61,18 @@
       <module name="freemarker-test" options="-parameters" />
       <module name="heima-file-starter" options="-parameters" />
       <module name="heima-leadnews" options="" />
+      <module name="heima-leadnews-admin" options="-parameters" />
+      <module name="heima-leadnews-admin-gateway" options="-parameters" />
       <module name="heima-leadnews-app-gateway" options="-parameters" />
       <module name="heima-leadnews-article" options="-parameters" />
       <module name="heima-leadnews-basic" options="" />
       <module name="heima-leadnews-common" options="-parameters" />
       <module name="heima-leadnews-feign-api" options="-parameters" />
-      <module name="heima-leadnews-gateway" options="" />
+      <module name="heima-leadnews-gateway" options="-parameters" />
       <module name="heima-leadnews-model" options="-parameters" />
       <module name="heima-leadnews-schedule" options="-parameters" />
       <module name="heima-leadnews-search" options="-parameters" />
-      <module name="heima-leadnews-service" options="-parameters" />
+      <module name="heima-leadnews-service" options="" />
       <module name="heima-leadnews-test" options="" />
       <module name="heima-leadnews-user" options="-parameters" />
       <module name="heima-leadnews-utils" options="-parameters" />

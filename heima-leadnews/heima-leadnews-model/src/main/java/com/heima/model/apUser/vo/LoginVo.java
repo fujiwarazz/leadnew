@@ -1,6 +1,5 @@
-package com.heima.model.user.vo;
+package com.heima.model.apUser.vo;
 
-import com.heima.model.user.entity.ApUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

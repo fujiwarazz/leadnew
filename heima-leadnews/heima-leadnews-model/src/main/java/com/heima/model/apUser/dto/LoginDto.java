@@ -1,4 +1,4 @@
-package com.heima.model.user.dto;
+package com.heima.model.apUser.dto;
 
 import lombok.Data;
 

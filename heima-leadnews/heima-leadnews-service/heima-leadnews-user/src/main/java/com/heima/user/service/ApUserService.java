@@ -1,9 +1,9 @@
 package com.heima.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.heima.model.user.dto.LoginDto;
-import com.heima.model.user.entity.ApUser;
-import com.heima.model.user.vo.LoginVo;
+import com.heima.model.apUser.dto.LoginDto;
+import com.heima.model.apUser.entity.ApUser;
+import com.heima.model.apUser.vo.LoginVo;
 
 /**
  * @Author peelsannaw

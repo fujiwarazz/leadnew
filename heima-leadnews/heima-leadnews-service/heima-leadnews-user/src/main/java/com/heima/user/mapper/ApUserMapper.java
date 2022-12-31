@@ -1,7 +1,7 @@
 package com.heima.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.heima.model.user.entity.ApUser;
+import com.heima.model.apUser.entity.ApUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

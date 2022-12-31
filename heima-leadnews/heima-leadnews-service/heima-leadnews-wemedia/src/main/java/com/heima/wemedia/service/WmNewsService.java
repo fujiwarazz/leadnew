@@ -1,6 +1,8 @@
 package com.heima.wemedia.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.heima.model.admin.dtos.SensitiveWordsInsertDto;
+import com.heima.model.admin.dtos.SensitiveWordsPageDto;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.wemedia.dto.WmNewsDto;
 import com.heima.model.wemedia.dto.WmNewsPageReqDto;
@@ -18,4 +20,10 @@ public interface WmNewsService extends IService<WmNews> {
     ResponseResult<?> submitNews(WmNewsDto wmNewsDto);
 
     ResponseResult<?> downOrUp(WmNewsUpdateDto wmnewsUpdateDto);
+
+    ResponseResult<?> deleteSensitiveWord(Integer id);
+
+    ResponseResult<?> getList(SensitiveWordsPageDto pageDto);
+
+    ResponseResult<?> saveSensitiveWord(SensitiveWordsInsertDto dto);
 }

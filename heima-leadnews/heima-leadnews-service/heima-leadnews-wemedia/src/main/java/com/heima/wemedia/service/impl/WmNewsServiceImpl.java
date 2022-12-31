@@ -13,8 +13,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.heima.common.constants.wm.WmConstants;
 import com.heima.common.exception.CustomException;
+import com.heima.model.admin.dtos.SensitiveWordsInsertDto;
+import com.heima.model.admin.dtos.SensitiveWordsPageDto;
+import com.heima.model.admin.vos.SensitiveWordsVo;
 import com.heima.model.common.dtos.PageResponseResult;
 import com.heima.model.common.dtos.ResponseResult;
+import com.heima.model.common.entity.WmSensitive;
 import com.heima.model.common.enums.AppHttpCodeEnum;
 import com.heima.model.wemedia.dto.WmNewsDto;
 import com.heima.model.wemedia.dto.WmNewsPageReqDto;
@@ -27,6 +31,7 @@ import com.heima.utils.common.WmThreadLocalUtil;
 import com.heima.wemedia.mapper.WmMaterialMapper;
 import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.mapper.WmNewsMaterialMapper;
+import com.heima.wemedia.mapper.WmSensitiveMapper;
 import com.heima.wemedia.service.WmNewAutoVerification;
 import com.heima.wemedia.service.WmNewsService;
 import com.heima.wemedia.service.WmTaskService;
@@ -57,6 +62,8 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
     private WmNewAutoVerification autoVerification;
     @Resource
     private WmTaskService wmTaskService;
+    @Resource
+    private WmSensitiveMapper wmSensitiveMapper;
     @Resource
     private KafkaTemplate<String,String>kafka;
     @Override
@@ -263,6 +270,45 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
             map.put("enable",wmnewsUpdateDto.getEnable());
             System.out.println(JSON.toJSONString(map));
             kafka.send(WmConstants.WM_NEWS_UP_OR_DOWN_TOPIC,JSON.toJSONString(map));
+        }
+        return ResponseResult.okResult();
+    }
+
+    @Override
+    public ResponseResult<?> deleteSensitiveWord(Integer id) {
+        int i = wmSensitiveMapper.deleteById(id);
+        if(i>0){
+            return ResponseResult.okResult();
+        }else {
+            return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseResult<?> getList(SensitiveWordsPageDto pageDto) {
+        SensitiveWordsVo sensitiveWordsVo = new SensitiveWordsVo();
+        LambdaQueryWrapper<WmSensitive> wrappers = null;
+        if(pageDto.getName()!=null && pageDto.getName().trim().length()>0){
+            wrappers = Wrappers.lambdaQuery(WmSensitive.class).eq(WmSensitive::getSensitives, pageDto.getName());
+        }
+        Page<WmSensitive> wmSensitivePage = wmSensitiveMapper.selectPage(new Page<>(pageDto.getPage(), pageDto.getSize()),
+                wrappers);
+        sensitiveWordsVo.setData(wmSensitivePage.getRecords());
+        sensitiveWordsVo.setTotal(wmSensitivePage.getTotal());
+        sensitiveWordsVo.setCurrentPage(pageDto.getPage());
+        sensitiveWordsVo.setSize(wmSensitivePage.getSize());
+        return ResponseResult.okResult(sensitiveWordsVo);
+    }
+
+    @Override
+    @Transactional
+    public ResponseResult<?> saveSensitiveWord(SensitiveWordsInsertDto dto) {
+        WmSensitive wmSensitive = BeanUtil.copyProperties(dto, WmSensitive.class);
+        wmSensitive.setCreatedTime(new Date(dto.getCreatedTime()));
+        if(dto.getId()==null){
+            wmSensitiveMapper.insert(wmSensitive);
+        }else{
+            wmSensitiveMapper.updateById(wmSensitive);
         }
         return ResponseResult.okResult();
     }

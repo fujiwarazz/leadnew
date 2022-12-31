@@ -1,5 +1,8 @@
 package com.heima.wemedia.controller.v1;
 
+import com.heima.apis.wmnews.IWmSensitiveClient;
+import com.heima.model.admin.dtos.SensitiveWordsInsertDto;
+import com.heima.model.admin.dtos.SensitiveWordsPageDto;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.wemedia.dto.WmNewsUpdateDto;
 import com.heima.model.wemedia.dto.WmNewsDto;
@@ -33,5 +36,7 @@ public class WmNewsController {
     public ResponseResult<?> downOrUp(@RequestBody WmNewsUpdateDto wmnewsUpdateDto){
         return wmNewsService.downOrUp(wmnewsUpdateDto);
     }
+
+
 }
 

@@ -1,7 +1,6 @@
 package com.heima.utils.common;
 
-import com.heima.model.user.entity.ApUser;
-import com.heima.model.wemedia.entity.WmUser;
+import com.heima.model.apUser.entity.ApUser;
 
 /**
  * @Author peelsannaw

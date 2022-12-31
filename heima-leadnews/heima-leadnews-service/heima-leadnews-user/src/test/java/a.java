@@ -1,5 +1,5 @@
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.heima.model.user.entity.ApUser;
+import com.heima.model.apUser.entity.ApUser;
 import com.heima.user.UserApplication;
 import com.heima.user.service.ApUserService;
 import org.junit.Test;
@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
 
 /**
  * @Author peelsannaw

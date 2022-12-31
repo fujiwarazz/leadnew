@@ -1,10 +1,8 @@
 package com.heima.search.interceptor;
 
-import com.heima.model.user.entity.ApUser;
-import com.heima.model.wemedia.entity.WmUser;
+import com.heima.model.apUser.entity.ApUser;
 import com.heima.utils.common.ApUserThreadLocal;
 import com.heima.utils.common.WebUtil;
-import com.heima.utils.common.WmThreadLocalUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 

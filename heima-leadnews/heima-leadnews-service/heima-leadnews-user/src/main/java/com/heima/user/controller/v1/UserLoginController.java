@@ -2,9 +2,8 @@ package com.heima.user.controller.v1;
 
 import com.heima.common.exception.CustomException;
 import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
-import com.heima.model.user.dto.LoginDto;
-import com.heima.model.user.vo.LoginVo;
+import com.heima.model.apUser.dto.LoginDto;
+import com.heima.model.apUser.vo.LoginVo;
 import com.heima.user.service.ApUserService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PostMapping;
