@@ -1,0 +1,13 @@
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.heima.common.exception.ExceptionCatch,\
+  com.heima.common.config.SwaggerConfiguration,\
+  com.heima.common.config.RedisConfig,\
+  com.heima.common.config.KnifeConfiguration,\
+  com.heima.common.config.MybatisPlusConfig,\
+  com.heima.common.config.MyMetaObjectHandler,\
+  com.heima.common.aliyun.GreenImageScan,\
+  com.heima.common.aliyun.GreenTextScan,\
+  com.heima.common.tess4j.Tess4jClient,\
+  com.heima.common.redis.CacheService
+
