@@ -1,6 +1,7 @@
-package com.heima.behavior.config;
+package com.heima.user.config;
 
-import com.heima.behavior.interceptor.JwtInterceptor;
+
+import com.heima.user.interceptor.JwtInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,6 +21,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/api/v1/login/login_auth");
+                .excludePathPatterns("/api/v1/login/login_auth/");
     }
 }

@@ -10,6 +10,7 @@ import com.heima.article.mapper.ApArticleContentMapper;
 import com.heima.article.mapper.ApArticleMapper;
 import com.heima.article.service.ApArticleService;
 import com.heima.article.service.ArticleFreemarkerService;
+import com.heima.common.annotation.LogEnhance;
 import com.heima.common.constants.ap_article.ArticleConstants;
 import com.heima.file.service.FileStorageService;
 import com.heima.model.article.dto.ArticleDto;
@@ -20,15 +21,17 @@ import com.heima.model.article.entity.ApArticleContent;
 import com.heima.common.common.dtos.ResponseResult;
 import com.heima.common.common.enums.AppHttpCodeEnum;
 import com.heima.model.search.vos.SearchArticleVo;
+import com.heima.user.constants.UserConstants;
+import com.heima.utils.common.ApUserThreadLocal;
 import freemarker.template.Configuration;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author peelsannaw
@@ -41,6 +44,8 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
 
     private final static short MAX_PAGE_SIZE = 50;
 
+    @Resource
+    StringRedisTemplate stringRedisTemplate;
     @Resource
     FileStorageService fileStorageService;
     @Resource
@@ -140,6 +145,73 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
         createArticleDocToEs(apArticle,dto.getContent(),s);
         //3.结果返回  文章的id
         return ResponseResult.okResult(apArticle.getId());
+    }
+
+    @Override
+    public ResponseResult<?> loadArticleBehavior(Map map) {
+        String articleId = map.get("articleId").toString();
+        String authorId = map.get("authorId").toString();
+        String userId = ApUserThreadLocal.getUser().getId().toString();
+        if(authorId == null || articleId == null){
+            return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+        }
+        Map<String,Object>result = new Hashtable<>();
+        String userDislike = ArticleConstants.ARTICLE_UNLIKE_PREFIX + userId;
+        String userLike = ArticleConstants.ARTICLE_LIKE_PREFIX + userId;
+        String userFollow = UserConstants.USER_FOLLOW_PREFIX + userId;
+        String userCollect = UserConstants.USER_COLLECT_ARTICLE_PREFIX+userId;
+        Set<String> members = stringRedisTemplate.opsForSet().members(userLike);
+        Set<String> members2 = stringRedisTemplate.opsForSet().members(userDislike);
+        Set<String> members3 = stringRedisTemplate.opsForSet().members(userFollow);
+        Boolean aBoolean = stringRedisTemplate.opsForHash().hasKey(userCollect, articleId);
+        boolean isLike = false,isDislike = false,isFollow = false,isCollect = false;
+        if(members!=null && members.contains(articleId)){
+              isLike = true;
+        }
+        if(members2!=null && members2.contains(articleId)){
+            isDislike = true;
+        }
+        if(members3!=null && members3.contains(authorId)){
+            isFollow = true;
+        }
+        if(aBoolean.equals(Boolean.TRUE)){
+            isCollect = true;
+        }
+        result.put("islike",isLike);
+        result.put("isunlike",isDislike);
+        result.put("isfollow",isFollow);
+        result.put("iscollection",isCollect);
+        return ResponseResult.okResult(result);
+    }
+
+    @Override
+    @LogEnhance(BusinessName = "用户行为:收藏")
+    public ResponseResult<?> userCollect(Map map) {
+        try {
+            String articleId = map.get("entryId").toString();
+            String operation = map.get("operation").toString();
+            Long publishedTime = (Long) map.get("publishedTime");
+            String type = map.get("type").toString();
+            String userId = ApUserThreadLocal.getUser().getId().toString();
+            String key = null;
+            if ("0".equals(type)) {
+                key = UserConstants.USER_COLLECT_ARTICLE_PREFIX + userId;
+            }else{
+                key = UserConstants.USER_COLLECT_FEED_PREFIX + userId;
+            }
+
+            Boolean member = stringRedisTemplate.opsForHash().hasKey(key,articleId);
+            if(Boolean.FALSE.equals(member)){
+                stringRedisTemplate.opsForHash().put(key,articleId,publishedTime.toString());
+            }else{
+                stringRedisTemplate.opsForHash().delete(key,articleId);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);
+        }
+        return ResponseResult.okResult();
+
     }
 
     private void createArticleDocToEs(ApArticle apArticle, String content,String path) {

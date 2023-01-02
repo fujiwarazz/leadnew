@@ -73,12 +73,13 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper,ApUser> implemen
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
         }
         try {
+            System.out.println(ApUserThreadLocal.getUser().getId());
             String key = UserConstants.USER_FOLLOW_PREFIX + ApUserThreadLocal.getUser().getId();
             Boolean member = stringRedisTemplate.opsForSet().isMember(key, dto.getAuthorId().toString());
             if(Boolean.FALSE.equals(member)){
-                stringRedisTemplate.opsForSet().add(key,dto.getArticleId().toString());
+                stringRedisTemplate.opsForSet().add(key,dto.getAuthorId().toString());
             }else{
-                stringRedisTemplate.opsForSet().remove(key,dto.getArticleId().toString());
+                stringRedisTemplate.opsForSet().remove(key,dto.getAuthorId().toString());
             }
         } catch (Exception e) {
             e.printStackTrace();

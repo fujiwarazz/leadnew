@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @Author peelsannaw
  * @create 10/11/2022 上午9:14
  */
 @RestController
-@RequestMapping("/api/v1/article")
+@RequestMapping("/api/v1/")
 @Api(value = "app端口用户登录controller")
 public class ArticleHomeController {
 
@@ -26,22 +27,30 @@ public class ArticleHomeController {
     private ApArticleService apArticleService;
 
 
-    @PostMapping("/load")
+    @PostMapping("/article/load")
     public ResponseResult<?> load(@RequestBody ArticleHomeDto dto) {
         return apArticleService.load(ArticleConstants.LOAD_TYPE_LOAD_MORE,dto);
     }
 
-    @PostMapping("/loadmore")
+    @PostMapping("/article/loadmore")
     public ResponseResult<?> loadMore(@RequestBody ArticleHomeDto dto) {
         return apArticleService.load(ArticleConstants.LOAD_TYPE_LOAD_MORE,dto);
     }
 
-    @PostMapping("/loadnew")
+    @PostMapping("/article/loadnew")
     public ResponseResult<?> loadNew(@RequestBody ArticleHomeDto dto) {
         return apArticleService.load(ArticleConstants.LOAD_TYPE_LOAD_NEW,dto);
     }
-    @PostMapping("save")
+    @PostMapping("/article/save")
     public ResponseResult<?> saveArticle(@RequestBody ArticleDto articleDto) {
         return apArticleService.saveArticleDTO(articleDto);
+    }
+    @PostMapping("/article/load_article_behavior")
+    public ResponseResult<?> loadArticleBehavior(@RequestBody Map map){
+        return apArticleService.loadArticleBehavior(map);
+    }
+    @PostMapping("/collection_behavior")
+    public ResponseResult<?> userCollect(@RequestBody Map map){
+        return apArticleService.userCollect(map);
     }
 }

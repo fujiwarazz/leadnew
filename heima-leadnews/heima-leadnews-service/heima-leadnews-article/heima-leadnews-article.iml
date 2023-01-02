@@ -111,6 +111,7 @@
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-hystrix:10.10.1" level="project" />
     <orderEntry type="library" name="Maven: com.netflix.archaius:archaius-core:0.7.7" level="project" />
     <orderEntry type="library" name="Maven: com.netflix.hystrix:hystrix-core:1.5.18" level="project" />
+    <orderEntry type="module" module-name="heima-leadnews-user" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-freemarker:2.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.31" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.2.13.RELEASE" level="project" />

@@ -1,6 +1,6 @@
-package com.heima.behavior.config;
+package com.heima.article.config;
 
-import com.heima.behavior.interceptor.JwtInterceptor;
+import com.heima.article.interceptor.JwtInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

@@ -31,7 +31,7 @@ public class ApUserBehaviorController {
     }
 
     @PostMapping("/un_likes_behavior")
-    public ResponseResult<?> changeLike(Map map){
+    public ResponseResult<?> changeLike(@RequestBody Map map){
         return behaviorService.changeLike(map);
     }
 }

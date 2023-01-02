@@ -6,4 +6,6 @@ package com.heima.user.constants;
  */
 public final class UserConstants {
     public static final String USER_FOLLOW_PREFIX = "app_user_follows:";
+    public static final String USER_COLLECT_ARTICLE_PREFIX = "app_user_article_collects:";
+    public static final String USER_COLLECT_FEED_PREFIX = "app_user_feed_collects:";
 }

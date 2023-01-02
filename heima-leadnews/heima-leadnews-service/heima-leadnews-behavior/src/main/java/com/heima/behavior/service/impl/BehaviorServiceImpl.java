@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.util.Hashtable;
@@ -75,10 +76,11 @@ public class BehaviorServiceImpl implements BehaviorService {
 
     @Override
     public ResponseResult<?> changeLike(Map map) {
-        Integer articleId = (Integer) map.get("articleId");
-        Short type = (Short) map.get("type");
-        String key = ArticleConstants.ARTICLE_UNLIKE_PREFIX + articleId;
-        if(type==0){
+        String articleId = map.get("articleId").toString();
+        String type = map.get("type").toString();
+        String userId = ApUserThreadLocal.getUser().getId().toString();
+        String key = ArticleConstants.ARTICLE_UNLIKE_PREFIX +userId ;
+        if("0".equals(type)){
             stringRedisTemplate.opsForSet().add(key,articleId.toString());
         }else{
             stringRedisTemplate.opsForSet().remove(key,articleId.toString());
