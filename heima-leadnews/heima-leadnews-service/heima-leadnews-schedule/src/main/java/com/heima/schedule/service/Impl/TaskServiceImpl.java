@@ -175,6 +175,7 @@ public class TaskServiceImpl implements TaskService {
      */
     @Scheduled(cron = "0 */1 * * * ?")
     public void syncTasksToWorkList() throws Exception{
+        //使用分布式锁解决分布式下的定时任务问题
         RLock lock = redissonClient.getLock(ScheduleConstants.SYNC_LOCK_NAME);
         boolean isLock = lock.tryLock(1000,1000*30, TimeUnit.MILLISECONDS);
         if(isLock){

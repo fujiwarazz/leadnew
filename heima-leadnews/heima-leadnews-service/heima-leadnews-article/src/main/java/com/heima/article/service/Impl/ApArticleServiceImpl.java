@@ -62,6 +62,7 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
     private RestHighLevelClient restHighLevelClient;
     @Resource
     private KafkaTemplate<String,String>kafka;
+
     /**
      * 根据参数加载文章列表
      * @param loadtype 1为加载更多  2为加载最新
@@ -147,6 +148,7 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
         return ResponseResult.okResult(apArticle.getId());
     }
 
+    
     @Override
     public ResponseResult<?> loadArticleBehavior(Map map) {
         String articleId = map.get("articleId").toString();
@@ -183,7 +185,7 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
         result.put("iscollection",isCollect);
         return ResponseResult.okResult(result);
     }
-
+    
     @Override
     @LogEnhance(BusinessName = "用户行为:收藏")
     public ResponseResult<?> userCollect(Map map) {
@@ -199,19 +201,32 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
             }else{
                 key = UserConstants.USER_COLLECT_FEED_PREFIX + userId;
             }
-
+            ApArticle article = apArticleMapper.selectById(articleId);
             Boolean member = stringRedisTemplate.opsForHash().hasKey(key,articleId);
-            if(Boolean.FALSE.equals(member)){
-                stringRedisTemplate.opsForHash().put(key,articleId,publishedTime.toString());
-            }else{
-                stringRedisTemplate.opsForHash().delete(key,articleId);
+
+
+            synchronized (this){
+                changeRedisAndDb(articleId, publishedTime, key, article, member);
             }
-        } catch (NumberFormatException e) {
+
+            apArticleMapper.updateById(article);
+        } catch (NumberFormatException e)
+        {
             e.printStackTrace();
             return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);
         }
         return ResponseResult.okResult();
 
+    }
+
+    private void changeRedisAndDb(String articleId, Long publishedTime, String key, ApArticle article, Boolean member) {
+        if(Boolean.FALSE.equals(member)){
+            stringRedisTemplate.opsForHash().put(key, articleId, publishedTime.toString());
+            article.setCollection(article.getCollection()+1);
+        }else{
+            stringRedisTemplate.opsForHash().delete(key, articleId);
+            article.setCollection(article.getCollection()-1);
+        }
     }
 
     private void createArticleDocToEs(ApArticle apArticle, String content,String path) {

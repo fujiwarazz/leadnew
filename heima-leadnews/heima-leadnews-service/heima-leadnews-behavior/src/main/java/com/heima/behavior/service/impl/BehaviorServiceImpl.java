@@ -9,6 +9,7 @@ import com.heima.common.redis.CacheService;
 import com.heima.model.article.dto.LikesBehaviorDto;
 import com.heima.model.article.entity.ApArticle;
 import com.heima.utils.common.ApUserThreadLocal;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @create 01/01/2023 20:46
  */
 @Service
+@Slf4j
 public class BehaviorServiceImpl implements BehaviorService {
 
     @Resource
@@ -46,7 +48,9 @@ public class BehaviorServiceImpl implements BehaviorService {
             Map<String ,Object> map = new Hashtable<>();
             map.put("isMember",isMember);
             map.put("articleId",likesBehaviorDto.getArticleId());
+            log.info("kafka推送消息");
             kafkaTemplate.send(ArticleConstants.ARTICLE_LIKE_CHANGE_TOPIC,JSON.toJSONString(map));
+            log.info("kafka推送消息结束");
             if(Boolean.FALSE.equals(isMember)){
                 stringRedisTemplate.opsForSet().add(key,likesBehaviorDto.getArticleId().toString());
             }else{
@@ -63,7 +67,7 @@ public class BehaviorServiceImpl implements BehaviorService {
     @Override
     @Async
     public ResponseResult<?> read(Map dto) {
-        Long articleId = (Long) dto.get("articleId");
+        Object articleId =dto.get("articleId");
         Integer count = (Integer) dto.get("count");
         if(articleId==null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
@@ -74,6 +78,11 @@ public class BehaviorServiceImpl implements BehaviorService {
         return ResponseResult.okResult();
     }
 
+    /**
+     * DISLIKE
+     * @param map
+     * @return
+     */
     @Override
     public ResponseResult<?> changeLike(Map map) {
         String articleId = map.get("articleId").toString();
@@ -85,6 +94,8 @@ public class BehaviorServiceImpl implements BehaviorService {
         }else{
             stringRedisTemplate.opsForSet().remove(key,articleId.toString());
         }
+        //推送消息更新
+
         return ResponseResult.okResult();
     }
 }

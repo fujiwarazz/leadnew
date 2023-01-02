@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "elasticsearch")
 public class ElasticSearchConfig {
+
     private String host;
     private int port;
 

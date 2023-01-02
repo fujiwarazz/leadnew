@@ -48,5 +48,19 @@
         order by aa.publish_time desc
         limit #{dto.size}
     </select>
+    <select id="getArticlesFromFiveDayBefore" resultMap="resultMap">
+        SELECT
+        aa.*
+        FROM
+        leadnews_article.`ap_article` aa
+        LEFT JOIN leadnews_article.ap_article_config aac ON aa.id = aac.id
+        <where>
+            and aac.is_delete != 1
+            and aac.is_down != 1
+            <if test="day != null">
+                and aa.publish_time <![CDATA[>=]]> #{day}
+            </if>
+        </where>
+    </select>
 
 </mapper>
