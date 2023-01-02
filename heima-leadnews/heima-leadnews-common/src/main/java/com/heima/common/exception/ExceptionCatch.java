@@ -1,10 +1,11 @@
 package com.heima.common.exception;
 
 
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+
+
+import com.heima.common.common.dtos.ResponseResult;
+import com.heima.common.common.enums.AppHttpCodeEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,7 +22,7 @@ public class ExceptionCatch {
      * @return
      */
     @ExceptionHandler(Exception.class)
-    public ResponseResult exception(Exception e){
+    public ResponseResult<?> exception(Exception e){
         e.printStackTrace();
         log.error("catch exception:{}",e.getMessage());
         return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);

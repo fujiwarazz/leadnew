@@ -1,0 +1,14 @@
+server:
+  port: 51807
+spring:
+  jackson:
+    date-format: yyyy-MM-dd hh:mm:ss
+  application:
+    name: leadnews-behavior
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+      config:
+        server-addr: 192.168.200.130:8848
+        file-extension: yml

@@ -1,7 +1,7 @@
 package com.heima.wemedia.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.heima.model.common.entity.WmSensitive;
+import com.heima.common.common.entity.WmSensitive;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

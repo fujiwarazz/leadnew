@@ -2,8 +2,9 @@ package com.heima.common.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.heima.common.annotation.LogEnhance;
+
 import com.heima.common.exception.CustomException;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -47,7 +48,7 @@ public class logAspect {
             proceed = point.proceed();
             afterHandler(proceed);
         }catch (Throwable e){
-            throw new CustomException(AppHttpCodeEnum.SERVER_ERROR);
+            throw new RuntimeException();
         }finally {
             // 结束后换行
             log.info("=======End=======" + System.lineSeparator());

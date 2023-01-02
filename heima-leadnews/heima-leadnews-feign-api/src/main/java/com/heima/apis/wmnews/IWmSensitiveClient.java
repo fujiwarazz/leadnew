@@ -2,7 +2,7 @@ package com.heima.apis.wmnews;
 
 import com.heima.model.admin.dtos.SensitiveWordsInsertDto;
 import com.heima.model.admin.dtos.SensitiveWordsPageDto;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

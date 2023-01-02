@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.heima.common.annotation.Prevent;
 import com.heima.common.annotation.PreventStrategy;
 import com.heima.common.exception.CustomException;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.StringUtils;
 import org.aspectj.lang.JoinPoint;

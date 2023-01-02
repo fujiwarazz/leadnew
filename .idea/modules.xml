@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateway/heima-leadnews-app-gateway/heima-leadnews-app-gateway.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateway/heima-leadnews-app-gateway/heima-leadnews-app-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-service/heima-leadnews-article/heima-leadnews-article.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-service/heima-leadnews-article/heima-leadnews-article.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-leadnews-basic.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-basic/heima-leadnews-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-service/heima-leadnews-behavior/heima-leadnews-behavior.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-service/heima-leadnews-behavior/heima-leadnews-behavior.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/heima-leadnews-common.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-common/heima-leadnews-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign-api/heima-leadnews-feign-api.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-feign-api/heima-leadnews-feign-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateway/heima-leadnews-gateway.iml" filepath="$PROJECT_DIR$/heima-leadnews/heima-leadnews-gateway/heima-leadnews-gateway.iml" />

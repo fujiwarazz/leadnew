@@ -2,9 +2,8 @@ package com.heima.apis.article;
 
 import com.heima.apis.article.fallback.IArticleFallback;
 import com.heima.model.article.dto.ArticleDto;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

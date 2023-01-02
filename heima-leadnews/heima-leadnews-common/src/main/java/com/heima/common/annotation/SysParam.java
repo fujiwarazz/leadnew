@@ -1,6 +1,5 @@
 package com.heima.common.annotation;
 
-import com.heima.model.common.enums.TypeEnum;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,6 +11,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SysParam {
     String name();
-    TypeEnum type();
+
     String description() default "";
 }

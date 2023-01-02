@@ -1,10 +1,9 @@
 package com.heima.schedule.controller;
 
 import com.heima.apis.schedule.IScheduleClient;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import com.heima.model.schedule.dto.Task;
 import com.heima.schedule.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

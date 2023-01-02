@@ -1,8 +1,8 @@
 package com.heima.search.service.Impl;
 
 import cn.hutool.core.util.StrUtil;
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.common.common.dtos.ResponseResult;
+import com.heima.common.common.enums.AppHttpCodeEnum;
 import com.heima.model.search.dtos.UserSearchDto;
 import com.heima.model.search.entity.mongo.ApAssociateWords;
 import com.heima.search.service.ApAssociateWordsService;

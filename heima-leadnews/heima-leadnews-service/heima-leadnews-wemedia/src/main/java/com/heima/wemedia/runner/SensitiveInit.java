@@ -1,12 +1,10 @@
 package com.heima.wemedia.runner;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.heima.model.common.entity.WmSensitive;
+import com.heima.common.common.entity.WmSensitive;
 import com.heima.utils.common.SensitiveWordUtil;
-import com.heima.wemedia.mapper.WmChannelMapper;
 import com.heima.wemedia.mapper.WmSensitiveMapper;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

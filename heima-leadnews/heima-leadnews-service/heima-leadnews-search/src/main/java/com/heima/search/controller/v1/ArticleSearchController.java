@@ -1,6 +1,6 @@
 package com.heima.search.controller.v1;
 
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import com.heima.model.search.dtos.UserSearchDto;
 import com.heima.search.service.ArticleSearchService;
 import org.springframework.web.bind.annotation.PostMapping;

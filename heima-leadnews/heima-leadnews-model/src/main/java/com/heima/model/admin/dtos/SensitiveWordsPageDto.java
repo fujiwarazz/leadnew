@@ -1,6 +1,6 @@
 package com.heima.model.admin.dtos;
 
-import com.heima.model.common.dtos.PageRequestDto;
+import com.heima.common.common.dtos.PageRequestDto;
 import lombok.Data;
 
 /**

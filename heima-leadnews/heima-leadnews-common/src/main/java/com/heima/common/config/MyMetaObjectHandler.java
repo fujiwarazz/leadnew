@@ -1,7 +1,7 @@
 package com.heima.common.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.heima.model.wemedia.entity.WmMaterial;
+
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;

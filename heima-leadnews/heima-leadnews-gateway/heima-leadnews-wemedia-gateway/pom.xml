@@ -10,12 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>heima-leadnews-wemedia-gateway</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.heima</groupId>
-            <artifactId>heima-leadnews-utils</artifactId>
-        </dependency>
-    </dependencies>
+
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

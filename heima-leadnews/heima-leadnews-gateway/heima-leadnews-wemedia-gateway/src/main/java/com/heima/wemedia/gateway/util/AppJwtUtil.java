@@ -1,6 +1,6 @@
 package com.heima.wemedia.gateway.util;
 
-import com.heima.utils.constants.TokenStatusEnum;
+
 import io.jsonwebtoken.*;
 
 import javax.crypto.SecretKey;

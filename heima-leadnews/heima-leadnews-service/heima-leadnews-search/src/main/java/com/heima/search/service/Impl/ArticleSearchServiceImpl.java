@@ -2,12 +2,10 @@ package com.heima.search.service.Impl;
 
 import com.heima.search.service.ApUserSearchService;
 import com.heima.utils.common.ApUserThreadLocal;
-import net.sf.jsqlparser.expression.BinaryExpression;
-import org.apache.avro.io.BinaryDecoder;
 import org.apache.commons.lang3.StringUtils;
 import com.alibaba.fastjson.JSON;
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.common.common.dtos.ResponseResult;
+import com.heima.common.common.enums.AppHttpCodeEnum;
 import com.heima.model.search.dtos.UserSearchDto;
 import com.heima.search.service.ArticleSearchService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +16,8 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +27,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @Author peelsannaw

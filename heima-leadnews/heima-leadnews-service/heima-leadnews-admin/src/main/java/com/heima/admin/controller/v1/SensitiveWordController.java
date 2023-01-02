@@ -3,7 +3,7 @@ package com.heima.admin.controller.v1;
 import com.heima.apis.wmnews.IWmSensitiveClient;
 import com.heima.model.admin.dtos.SensitiveWordsInsertDto;
 import com.heima.model.admin.dtos.SensitiveWordsPageDto;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

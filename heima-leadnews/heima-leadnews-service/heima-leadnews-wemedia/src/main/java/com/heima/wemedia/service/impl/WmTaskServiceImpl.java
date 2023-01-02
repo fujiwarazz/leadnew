@@ -2,8 +2,7 @@ package com.heima.wemedia.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.heima.apis.schedule.IScheduleClient;
-import com.heima.common.annotation.LogEnhance;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import com.heima.model.schedule.dto.Task;
 import com.heima.model.wemedia.TaskTypeEnum;
 import com.heima.model.wemedia.entity.WmNews;
@@ -16,7 +15,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 /**

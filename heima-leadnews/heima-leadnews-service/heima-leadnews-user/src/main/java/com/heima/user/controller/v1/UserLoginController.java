@@ -1,7 +1,7 @@
 package com.heima.user.controller.v1;
 
 import com.heima.common.exception.CustomException;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import com.heima.model.apUser.dto.LoginDto;
 import com.heima.model.apUser.vo.LoginVo;
 import com.heima.user.service.ApUserService;

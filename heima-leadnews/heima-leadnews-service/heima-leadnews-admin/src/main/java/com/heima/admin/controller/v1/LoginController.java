@@ -2,7 +2,7 @@ package com.heima.admin.controller.v1;
 
 import com.heima.admin.service.AdUserService;
 import com.heima.model.admin.dtos.AdUserDto;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

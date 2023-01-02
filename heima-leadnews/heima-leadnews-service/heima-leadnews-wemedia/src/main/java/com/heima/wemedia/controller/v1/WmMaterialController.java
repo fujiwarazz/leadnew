@@ -1,11 +1,9 @@
 package com.heima.wemedia.controller.v1;
 
-import com.heima.model.common.dtos.PageRequestDto;
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.common.common.dtos.ResponseResult;
+import com.heima.common.common.enums.AppHttpCodeEnum;
 import com.heima.model.wemedia.dto.WmMaterialDto;
 import com.heima.wemedia.service.WmMaterialService;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,8 +1,9 @@
 package com.heima.wemedia.gateway.filter;
 
 
-import com.heima.utils.constants.TokenStatusEnum;
+
 import com.heima.wemedia.gateway.util.AppJwtUtil;
+import com.heima.wemedia.gateway.util.TokenStatusEnum;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;

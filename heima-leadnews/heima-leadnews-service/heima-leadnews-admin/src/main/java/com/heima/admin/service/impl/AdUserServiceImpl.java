@@ -11,12 +11,10 @@ import com.heima.model.admin.dtos.AdUserDto;
 import com.heima.model.admin.dtos.LoginDto;
 import com.heima.model.admin.entity.AdUser;
 import com.heima.model.admin.vos.LoginVo;
-import com.heima.model.common.dtos.ResponseResult;
-import com.heima.model.common.enums.AppHttpCodeEnum;
-import com.heima.utils.common.AdminThreadLocalUtil;
+import com.heima.common.common.dtos.ResponseResult;
+import com.heima.common.common.enums.AppHttpCodeEnum;
 import com.heima.utils.common.AppJwtUtil;
 import com.heima.utils.common.MD5Utils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

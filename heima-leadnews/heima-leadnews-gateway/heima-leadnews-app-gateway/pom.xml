@@ -12,20 +12,13 @@
     <artifactId>heima-leadnews-app-gateway</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.heima</groupId>
-            <artifactId>heima-leadnews-utils</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>3.4.1</version>
+            <scope>compile</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.heima</groupId>-->
-<!--            <artifactId>heima-leadnews-common</artifactId>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.boot</groupId>-->
-<!--                    <artifactId>spring-boot-starter-web</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
     </dependencies>
+
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

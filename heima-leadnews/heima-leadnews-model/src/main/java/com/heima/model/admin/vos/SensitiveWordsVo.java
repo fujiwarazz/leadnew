@@ -1,6 +1,6 @@
 package com.heima.model.admin.vos;
 
-import com.heima.model.common.entity.WmSensitive;
+import com.heima.common.common.entity.WmSensitive;
 import lombok.Data;
 
 import java.util.List;

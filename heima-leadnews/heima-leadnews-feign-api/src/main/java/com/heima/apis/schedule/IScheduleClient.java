@@ -1,7 +1,6 @@
 package com.heima.apis.schedule;
 
-import com.heima.apis.article.fallback.IArticleFallback;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import com.heima.model.schedule.dto.Task;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

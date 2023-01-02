@@ -2,7 +2,8 @@ package com.heima.app.gateway.filter;
 
 
 import com.heima.app.gateway.util.AppJwtUtil;
-import com.heima.utils.constants.TokenStatusEnum;
+
+import com.heima.app.gateway.util.TokenStatusEnum;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -16,21 +17,23 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
+
 @Component
 @Slf4j
 public class AuthorizeFilter implements Ordered, GlobalFilter {
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         //1.获取request和response对象
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
-
+        System.out.println(request.getPath());
         //2.判断是否是登录
         if(request.getURI().getPath().contains("/login")){
             //放行
             return chain.filter(exchange);
         }
-
 
         //3.获取token
         String token = request.getHeaders().getFirst("token");

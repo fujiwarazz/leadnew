@@ -1,6 +1,7 @@
 package com.heima.model.wemedia.dto;
 
-import com.heima.model.common.dtos.PageRequestDto;
+
+import com.heima.common.common.dtos.PageRequestDto;
 import lombok.Data;
 
 /**

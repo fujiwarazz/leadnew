@@ -3,7 +3,7 @@ package com.heima.wemedia.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.heima.model.admin.dtos.SensitiveWordsInsertDto;
 import com.heima.model.admin.dtos.SensitiveWordsPageDto;
-import com.heima.model.common.dtos.ResponseResult;
+import com.heima.common.common.dtos.ResponseResult;
 import com.heima.model.wemedia.dto.WmNewsDto;
 import com.heima.model.wemedia.dto.WmNewsPageReqDto;
 import com.heima.model.wemedia.dto.WmNewsUpdateDto;

@@ -1,6 +1,7 @@
 package com.heima.common.exception;
 
-import com.heima.model.common.enums.AppHttpCodeEnum;
+
+import com.heima.common.common.enums.AppHttpCodeEnum;
 
 /**
  * @author peelsannaw
