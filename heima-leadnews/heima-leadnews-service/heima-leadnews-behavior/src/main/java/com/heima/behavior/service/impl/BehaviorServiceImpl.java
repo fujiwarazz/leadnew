@@ -8,6 +8,7 @@ import com.heima.common.constants.ap_article.ArticleConstants;
 import com.heima.common.redis.CacheService;
 import com.heima.model.article.dto.LikesBehaviorDto;
 import com.heima.model.article.entity.ApArticle;
+import com.heima.model.message.UpdateArticleMess;
 import com.heima.utils.common.ApUserThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -40,22 +41,34 @@ public class BehaviorServiceImpl implements BehaviorService {
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
         }
         try {
-            //从redis中判断是否点赞,同步更新数据库
-            System.out.println(ApUserThreadLocal.getUser().getId());
+            UpdateArticleMess updateArticleMess = new UpdateArticleMess();
+            updateArticleMess.setArticleId(likesBehaviorDto.getArticleId());
+            updateArticleMess.setType(UpdateArticleMess.UpdateArticleType.LIKES);
+                //从redis中判断是否点赞,同步更新数据库
+
             String key = ArticleConstants.ARTICLE_LIKE_PREFIX+ ApUserThreadLocal.getUser().getId();
             System.out.println(key);
             Boolean isMember = stringRedisTemplate.opsForSet().isMember(key, likesBehaviorDto.getArticleId().toString());
-            Map<String ,Object> map = new Hashtable<>();
-            map.put("isMember",isMember);
-            map.put("articleId",likesBehaviorDto.getArticleId());
-            log.info("kafka推送消息");
-            kafkaTemplate.send(ArticleConstants.ARTICLE_LIKE_CHANGE_TOPIC,JSON.toJSONString(map));
-            log.info("kafka推送消息结束");
+
+//            Map<String ,Object> map = new Hashtable<>();
+//            map.put("isMember",isMember);
+//            map.put("articleId",likesBehaviorDto.getArticleId());
+//            log.info("kafka推送消息");
+           // kafkaTemplate.send(ArticleConstants.ARTICLE_LIKE_CHANGE_TOPIC,JSON.toJSONString(map));
+//            log.info("kafka推送消息结束");
+
+
             if(Boolean.FALSE.equals(isMember)){
+                updateArticleMess.setAdd(1);
                 stringRedisTemplate.opsForSet().add(key,likesBehaviorDto.getArticleId().toString());
             }else{
+                updateArticleMess.setAdd(-1);
                 stringRedisTemplate.opsForSet().remove(key,likesBehaviorDto.getArticleId().toString());
             }
+            //发送消息给stream
+            log.info("kafka推送消息");
+            kafkaTemplate.send(ArticleConstants.HOT_ARTICLE_SCORE_TOPIC,JSON.toJSONString(updateArticleMess));
+            log.info("kafka推送消息结束");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);
@@ -65,16 +78,20 @@ public class BehaviorServiceImpl implements BehaviorService {
     }
 
     @Override
-    @Async
+    @SuppressWarnings("all")
     public ResponseResult<?> read(Map dto) {
-        Object articleId =dto.get("articleId");
+        String articleId = (String) dto.get("articleId");
         Integer count = (Integer) dto.get("count");
         if(articleId==null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
         }
         String key = ArticleConstants.ARTICLE_READ_PREFIX + articleId;
         stringRedisTemplate.opsForValue().increment(key,1);
-        kafkaTemplate.send(ArticleConstants.ARTICLE_READ_INCRE,articleId.toString());
+        UpdateArticleMess updateArticleMess = new UpdateArticleMess();
+        updateArticleMess.setArticleId(Long.parseLong(articleId));
+        updateArticleMess.setType(UpdateArticleMess.UpdateArticleType.VIEWS);
+        updateArticleMess.setAdd(1);
+        kafkaTemplate.send(ArticleConstants.HOT_ARTICLE_SCORE_TOPIC,JSON.toJSONString(updateArticleMess));
         return ResponseResult.okResult();
     }
 
@@ -98,4 +115,6 @@ public class BehaviorServiceImpl implements BehaviorService {
 
         return ResponseResult.okResult();
     }
+
+
 }

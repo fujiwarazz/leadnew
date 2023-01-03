@@ -15,6 +15,7 @@ import java.util.Date;
 @Data
 public class ArticleHomeDto {
 
+    //首页分页查询需要传递时间,并且需要给时间设置数据库index
     @ApiModelProperty(value = "最大时间")
     private Date maxBehotTime;
 

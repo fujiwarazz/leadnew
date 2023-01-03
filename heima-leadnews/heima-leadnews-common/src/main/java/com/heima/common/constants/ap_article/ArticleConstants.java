@@ -43,4 +43,7 @@ public class ArticleConstants {
     public static final Integer ARTICLE_COLLECT_WEIGHT = 8;
 
     public static final String HOT_ARTICLE_FIRST_PAGE = "hot_article_first_page:";
+
+    public static final String HOT_ARTICLE_SCORE_TOPIC="hot.article.score.topic";
+    public static final String HOT_ARTICLE_INCR_HANDLE_TOPIC="hot.article.incr.handle.topic";
 }
