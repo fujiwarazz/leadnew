@@ -23,7 +23,6 @@ import com.heima.common.common.enums.AppHttpCodeEnum;
 import com.heima.model.article.vo.HotArticleVo;
 import com.heima.model.message.ArticleVisitStreamMess;
 import com.heima.model.search.vos.SearchArticleVo;
-import com.heima.user.constants.UserConstants;
 import com.heima.utils.common.ApUserThreadLocal;
 import freemarker.template.Configuration;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +49,9 @@ import java.util.stream.Collectors;
 public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle> implements ApArticleService {
 
     private final static short MAX_PAGE_SIZE = 50;
-
+    public static final String USER_FOLLOW_PREFIX = "app_user_follows:";
+    public static final String USER_COLLECT_ARTICLE_PREFIX = "app_user_article_collects:";
+    public static final String USER_COLLECT_FEED_PREFIX = "app_user_feed_collects:";
     @Resource
     StringRedisTemplate stringRedisTemplate;
     @Resource
@@ -188,8 +189,8 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
         Map<String, Object> result = new Hashtable<>();
         String userDislike = ArticleConstants.ARTICLE_UNLIKE_PREFIX + userId;
         String userLike = ArticleConstants.ARTICLE_LIKE_PREFIX + userId;
-        String userFollow = UserConstants.USER_FOLLOW_PREFIX + userId;
-        String userCollect = UserConstants.USER_COLLECT_ARTICLE_PREFIX + userId;
+        String userFollow = USER_FOLLOW_PREFIX + userId;
+        String userCollect = USER_COLLECT_ARTICLE_PREFIX + userId;
         Set<String> members = stringRedisTemplate.opsForSet().members(userLike);
         Set<String> members2 = stringRedisTemplate.opsForSet().members(userDislike);
         Set<String> members3 = stringRedisTemplate.opsForSet().members(userFollow);
@@ -225,9 +226,9 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
             String userId = ApUserThreadLocal.getUser().getId().toString();
             String key = null;
             if ("0".equals(type)) {
-                key = UserConstants.USER_COLLECT_ARTICLE_PREFIX + userId;
+                key = USER_COLLECT_ARTICLE_PREFIX + userId;
             } else {
-                key = UserConstants.USER_COLLECT_FEED_PREFIX + userId;
+                key = USER_COLLECT_FEED_PREFIX + userId;
             }
             ApArticle article = apArticleMapper.selectById(articleId);
             Boolean member = stringRedisTemplate.opsForHash().hasKey(key, articleId);
