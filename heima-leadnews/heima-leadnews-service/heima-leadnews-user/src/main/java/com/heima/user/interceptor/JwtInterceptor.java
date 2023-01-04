@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println(request.getRequestURI());
+        System.out.println("被拦截");
         String userId = request.getHeader("userId");
         if(userId!=null){
             ApUser apUser = new ApUser();
