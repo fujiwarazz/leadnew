@@ -75,7 +75,7 @@
       <module name="heima-leadnews-model" options="-parameters" />
       <module name="heima-leadnews-schedule" options="-parameters" />
       <module name="heima-leadnews-search" options="-parameters" />
-      <module name="heima-leadnews-service" options="" />
+      <module name="heima-leadnews-service" options="-parameters" />
       <module name="heima-leadnews-test" options="" />
       <module name="heima-leadnews-user" options="-parameters" />
       <module name="heima-leadnews-utils" options="-parameters" />
